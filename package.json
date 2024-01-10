@@ -1,0 +1,11 @@
+{
+  "name": "form-element-mixin",
+  "version": "0.0.1",
+  "description": "A mixin to make Custom Elements participate in forms and form validation",
+  "main": "FormElementMixin.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Danny Moerkerke <danny@dannymoerkerke.nl>",
+  "license": "ISC"
+}

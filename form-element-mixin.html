@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Mixin validation</title>
+
+    <style>
+      .error-message {
+        display: none;
+        border: 1px solid #ff0000;
+        color: #ff0000;
+        padding: 5px;
+      }
+
+      custom-input[invalid] ~ .error-message {
+        display: inline-block;
+      }
+
+      label {
+        display: flex;
+        flex-direction: column;
+        width: 250px
+      }
+
+      label + button[type="submit"] {
+        margin-top: 15px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <button type="button">Before</button>
+
+    <form>
+      <input type="text" name="name" value="danny" required>
+      <label>
+        Custom Input
+        <custom-input
+          required
+          name="email"
+          minlength="5"
+          validate-on-change
+          custom-error-display
+          data-valuemissing="You forgot something..."
+          data-tooshort="Type 5 letters"
+        ></custom-input>
+
+        <div class="error-message"></div>
+      </label>
+
+      <button type="submit">Send</button>
+      <input type="reset" value="Reset">
+    </form>
+
+    <button type="button">After</button>
+
+    <p>
+      <button type="button" id="restore">Restore</button>
+    </p>
+    <script type="module">
+      import {FormElementMixin} from './FormElementMixin.js';
+
+      class CustomInput extends FormElementMixin(HTMLElement) {
+
+        constructor() {
+          super();
+          const shadowRoot = this.attachShadow({mode: 'open'});
+
+          shadowRoot.innerHTML = `
+            <style>
+
+            </style>
+
+            <input type="text">
+          `;
+        }
+
+        connectedCallback() {
+          this.inputNode = this.shadowRoot.querySelector('input');
+        }
+      }
+
+      customElements.define('custom-input', CustomInput);
+
+    </script>
+
+    <script>
+      const form = document.querySelector('form');
+      const customInput = document.querySelector('custom-input');
+      const errorMessage = document.querySelector('.error-message');
+      const restoreButton = document.querySelector('#restore');
+
+      restoreButton.addEventListener('click', (e) => {
+        customInput.value = 'restored';
+      })
+
+      form.addEventListener('submit', (e) => {
+        console.log('submit');
+        e.preventDefault();
+
+        const formData = new FormData(form);
+
+        for(const [key, value] of formData.entries()) {
+          console.log(key, value);
+        }
+      });
+
+      customInput.addEventListener('invalid', (e) => {
+        console.log('invalid', customInput.validationMessage);
+
+        errorMessage.textContent = customInput.validationMessage;
+      });
+
+    </script>
+  </body>
+</html>
