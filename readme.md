@@ -6,7 +6,7 @@ A mixin to associate a Custom Element with a form: [https://web.dev/articles/mor
 To install run:
 
 ```
-npm install @dannymoerkerke/form-element-mixin
+npm install form-element-mixin
 ```
 
 Then `import` the mixin:
