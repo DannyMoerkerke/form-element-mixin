@@ -10,7 +10,6 @@ export const FormElementMixin = (superClass) => class extends superClass {
       'type',
       'value',
       'placeholder',
-      'autocomplete',
       'required',
       'min',
       'max',
@@ -80,7 +79,6 @@ export const FormElementMixin = (superClass) => class extends superClass {
         else {
           this.#inputNode.setAttribute(attr, attrValue);
         }
-
       }
     });
 
@@ -103,7 +101,7 @@ export const FormElementMixin = (superClass) => class extends superClass {
     this.addEventListener('invalid', (e) => {
       this.invalid = true;
       this.pristine = false;
-      console.log('invalid');
+      // console.log('invalid');
       // when a custom error needs to be displayed, prevent the native error from showing
       // NOTE: this suppresses the error "element is not focusable" when native form validation is implemented but the
       // element does not have a tabindex attribute and the element is invalid and the form in which it is placed is
@@ -163,6 +161,7 @@ export const FormElementMixin = (superClass) => class extends superClass {
   set value(value) {
     this.#inputNode.value = value;
     this.#internals.setFormValue(value);
+    this.validateInput();
   }
 
   get form() {
@@ -204,7 +203,7 @@ export const FormElementMixin = (superClass) => class extends superClass {
   validateInput() {
     // get the validity of the internal <input>
     const validState = this.#inputNode.validity;
-    console.log(validState);
+    // console.log(validState);
     // reset this.invalid before validating again
     this.invalid = false;
 

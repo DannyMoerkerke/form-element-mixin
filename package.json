@@ -2,10 +2,26 @@
   "name": "form-element-mixin",
   "version": "0.0.1",
   "description": "A mixin to make Custom Elements participate in forms and form validation",
-  "main": "FormElementMixin.js",
+  "main": "src/FormElementMixin.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "wtr test/**/*.test.js --node-resolve"
   },
   "author": "Danny Moerkerke <danny@dannymoerkerke.nl>",
-  "license": "ISC"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:DannyMoerkerke/form-element-mixin.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "/src"
+  ],
+  "devDependencies": {
+    "@open-wc/testing": "^4.0.0",
+    "@web/test-runner": "^0.18.0",
+    "@web/test-runner-playwright": "^0.11.0",
+    "sinon": "^17.0.1"
+  }
 }
