@@ -61,12 +61,10 @@ To do this, set an event handler for the `invalid` event and get the error messa
 const errorMessage = document.querySelector('.error-message');
 
 myInput.addEventListener('invalid', (e) => {
-  console.log('invalid', customInput.validationMessage);
-
-  errorMessage.textContent = customInput.validationMessage;
+  errorMessage.textContent = myInput.validationMessage;
 });
 ```
-When `custom-error-message` is set the element will get an `invalid` attribute when it's invalid which can be used to 
+When `custom-error-display` is set the element will get an `invalid` attribute when it's invalid which can be used to 
 display the error message with CSS:
 
 ```css
@@ -87,7 +85,7 @@ my-input[invalid] ~ .error-message {
 - `required`: whether the element is required
 - `validate-on-change`: whether the element should be validated on change, meaning when it's interacted with and the 
   `blur` event fires
-- `custom-error-message`: shows a custom error message instead of the native error, enables styling of the error message
+- `custom-error-display`: shows a custom error message instead of the native error, enables styling of the error message
 - `data-valuemissing`: error message when the element is required and has no value
 - `data-typemismatch`: error message when the syntax of the data is not correct, for example when type is `email` but 
   the value is not a valid email address

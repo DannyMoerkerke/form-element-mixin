@@ -253,6 +253,12 @@ export const FormElementMixin = (superClass) => class extends superClass {
     this.#internals.setValidity(error, message);
   }
 
+  setErrorMessage(message) {
+    this.validationError = 'customError';
+    this.setCustomValidity(message);
+    this.reportValidity();
+  }
+
   get disabled() {
     return this.hasAttribute('disabled');
   }
