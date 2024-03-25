@@ -11,12 +11,12 @@ npm install form-element-mixin
 
 Then `import` the mixin:
 
-```
+```javascript
 import {FormElementMixin} from './node_modules/@dannymoerkerke/form-element-mixin/src/FormElementMixin';
 ```
 Then pass the element you want to extend to the `FormElementMixin` factory function:
 
-```
+```javascript
 class MyInput extends FormElementMixin(HTMLElement) {
   constructor() {
     super();
@@ -39,7 +39,7 @@ Note that you need to set the internal input to the `inputNode` property.
 
 Add the HTML tag:
 
-```
+```html
 <my-element
   type="text"
   name="my-input"
