@@ -224,7 +224,7 @@ export const FormElementMixin = (superClass) => class extends superClass {
           const errorMessage = this.hasAttribute(attr) ? this.getAttribute(attr) : this.#inputNode.validationMessage;
 
           // set the validity error reason and the corresponding message
-          this.#internals.setValidity({[this.validationError]: true}, errorMessage);
+          this.#internals.setValidity({[this.validationError]: true}, errorMessage, this.#inputNode);
 
           // when a custom error needs to be displayed, dispatch the 'invalid' event manually so consuming code
           // can use this as a hook to get the correct error message and display it
@@ -250,7 +250,7 @@ export const FormElementMixin = (superClass) => class extends superClass {
     const error = message ? {[this.validationError]: true} : {};
 
     // the error is now shown or cleared depending on `error`
-    this.#internals.setValidity(error, message);
+    this.#internals.setValidity(error, message, this.#inputNode);
   }
 
   setErrorMessage(message) {
