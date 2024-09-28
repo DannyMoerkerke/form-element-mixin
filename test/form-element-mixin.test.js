@@ -185,6 +185,40 @@ describe('FormElementMixin', () => {
     assert.equal(input.dataset['data-tooshort'], input.dataset['data-patternmismatch']);
   });
 
+  it('includes the value in FormData when submitted', async () => {
+    const options = {
+      type: 'text',
+      name: 'testInput',
+      value: 'initial value'
+    };
+    const form = await fixture(getFormHTML(options));
+    const input = form.querySelector('custom-input');
+
+    // Change the value
+    input.value = 'submitted value';
+
+    const formData = new FormData(form);
+
+    assert.equal(formData.get('testInput'), 'submitted value', 'FormData should include the input value');
+  });
+
+  it('sets the value when initialized with a value attribute', async () => {
+    const options = {
+      type: 'text',
+      name: 'testInput',
+      value: 'test value'
+    };
+    const form = await fixture(getFormHTML(options));
+    const input = form.querySelector('custom-input');
+
+    // Check if the value is set correctly
+    assert.equal(input.value, 'test value', 'Value should be set to the initial value');
+
+    // Check if the internal input has the correct value
+    const internalInput = input.shadowRoot.querySelector('input');
+    assert.equal(internalInput.value, 'test value', 'Internal input should have the initial value');
+  });
+
   it('gets the correct error message when it is required and has no value', async () => {
     const options = {
       type: 'text',
