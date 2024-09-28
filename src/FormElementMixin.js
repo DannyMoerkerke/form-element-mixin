@@ -45,6 +45,11 @@ export const FormElementMixin = (superClass) => class extends superClass {
   set inputNode(node) {
     this.#inputNode = node;
 
+    // when the value attribute is present, set the value of the internal <input> and make sure setFormValue is called
+    if(this.hasAttribute('value')) {
+      this.value = this.getAttribute('value');
+    }
+
     // set the required properties (constraints) on the internal <input>
     this.constructor.observedAttributes.forEach((a) => {
       const attr = a.toLowerCase();
@@ -155,10 +160,12 @@ export const FormElementMixin = (superClass) => class extends superClass {
   }
 
   get value() {
+    console.log('get', this.#inputNode.value);
     return this.#inputNode.value;
   }
 
   set value(value) {
+    console.log('set', value);
     this.#inputNode.value = value;
     this.#internals.setFormValue(value);
     this.validateInput();
