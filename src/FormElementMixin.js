@@ -16,7 +16,9 @@ export const FormElementMixin = (superClass) => class extends superClass {
       'minlength',
       'maxlength',
       'pattern',
-      'disabled'
+      'disabled',
+      'autocomplete',
+      'autocapitalize',
     ];
   }
 
