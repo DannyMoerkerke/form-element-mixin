@@ -1,6 +1,6 @@
 {
   "name": "form-element-mixin",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A mixin to make Custom Elements participate in forms and form validation",
   "main": "src/FormElementMixin.js",
   "scripts": {

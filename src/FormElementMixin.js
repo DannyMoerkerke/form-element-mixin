@@ -44,6 +44,10 @@ export const FormElementMixin = (superClass) => class extends superClass {
     this.pristine = true;
   }
 
+  get inputNode() {
+    return this.#inputNode;
+  }
+
   set inputNode(node) {
     this.#inputNode = node;
 
